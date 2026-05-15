@@ -1,0 +1,117 @@
+:root {
+  --bg-start: #d8e8ff;
+  --bg-end: #84bfff;
+  --panel-bg: rgba(255, 255, 255, 0.3);
+  --panel-line: rgba(255, 255, 255, 0.54);
+  --title: #0c2f7a;
+  --title-accent: #1f6fff;
+  --text: #204b89;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text);
+  background: linear-gradient(160deg, var(--bg-start), var(--bg-end));
+  overflow: hidden;
+}
+
+.page {
+  position: relative;
+  height: 100vh;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(216, 232, 255, 0.16) 0%,
+      rgba(132, 191, 255, 0.2) 100%
+    ),
+    url("./assets/bg.png");
+  background-size: 100% 100%, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  pointer-events: none;
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.brand {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand-main {
+  font-size: clamp(42px, 6vw, 70px);
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: var(--title);
+}
+
+.brand-sub {
+  font-size: clamp(28px, 3vw, 48px);
+  font-weight: 750;
+  color: var(--title-accent);
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: clamp(18px, 1.8vw, 28px);
+  color: #345d9e;
+  letter-spacing: 0.08em;
+}
+
+.map-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1320px;
+  margin: 16px auto 0;
+  height: calc(100vh - 170px);
+}
+
+.map-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 20px;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 16px 12px;
+  }
+
+  .map-section {
+    height: calc(100vh - 132px);
+  }
+
+  .map-image {
+    border-radius: 14px;
+  }
+}
