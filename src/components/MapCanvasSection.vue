@@ -61,7 +61,14 @@
             </div>
           </div>
         </div>
+
+        <div class="mobile-zoom">
+          <button type="button" aria-label="放大" @click="zoomIn">+</button>
+          <button type="button" aria-label="缩小" @click="zoomOut">−</button>
+          <button type="button" aria-label="复位" @click="resetMap">◎</button>
+        </div>
       </div>
+
       <div class="island-card">
         <strong>南海诸岛</strong>
         <div class="island-shapes">
