@@ -1,4 +1,25 @@
 :root {
+  --background: 200 100% 78%;
+  --foreground: 218 65% 26%;
+  --card: 0 0% 100%;
+  --card-foreground: 218 65% 26%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 218 65% 26%;
+  --primary: 219 100% 58%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 200 60% 92%;
+  --secondary-foreground: 220 74% 24%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 200 60% 92%;
+  --accent-foreground: 220 74% 24%;
+  --destructive: 0 100% 64%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 219 100% 58%;
+  --radius: 0.75rem;
+
   color: #17326b;
   font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
@@ -14,8 +35,9 @@ html {
 html,
 body,
 #app {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  height: 100dvh;
 }
 
 body {
@@ -47,6 +69,11 @@ input {
   backdrop-filter: blur(18px);
 }
 
+/* -- Sidebar overlay (mobile) -------------------- */
+.sidebar-overlay {
+  display: none;
+}
+
 .sidebar-shell {
   position: fixed;
   top: 18px;
@@ -54,6 +81,7 @@ input {
   bottom: 16px;
   z-index: 6;
   width: 200px;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar {
@@ -63,6 +91,10 @@ input {
   gap: 14px;
   padding: 12px 10px 14px;
   border-radius: 30px;
+}
+
+.sidebar-close-btn {
+  display: none;
 }
 
 .assistant-card {
@@ -177,7 +209,8 @@ input {
 .strip-arrow:hover,
 .destination-card button:hover,
 .section-head button:hover,
-.assistant-footer button:hover {
+.assistant-footer button:hover,
+.mobile-menu-btn:hover {
   transform: translateY(-1px);
 }
 
@@ -187,7 +220,8 @@ input {
 .strip-arrow:active,
 .destination-card button:active,
 .section-head button:active,
-.assistant-footer button:active {
+.assistant-footer button:active,
+.mobile-menu-btn:active {
   transform: translateY(0) scale(0.98);
 }
 
@@ -203,6 +237,7 @@ input {
   font-size: 12px;
 }
 
+/* -- Layout -------------------------------------- */
 .page-shell {
   position: relative;
   z-index: 2;
@@ -221,20 +256,43 @@ input {
   z-index: 5;
 }
 
+.mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.84);
+  color: #17326b;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow:
+    0 18px 36px rgba(46, 114, 188, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .brand-block {
   display: grid;
   gap: 10px;
+  min-width: 0;
 }
 
 .brand-line {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .brand-line h1 {
   margin: 0;
-  font-size: clamp(42px, 4.4vw, 72px);
+  font-size: clamp(32px, 4.4vw, 72px);
   line-height: 0.92;
   letter-spacing: -0.07em;
   font-style: italic;
@@ -248,7 +306,7 @@ input {
 
 .brand-line p {
   margin: 0;
-  font-size: clamp(26px, 1.9vw, 40px);
+  font-size: clamp(20px, 1.9vw, 40px);
   font-weight: 800;
   color: #163a78;
 }
@@ -274,6 +332,7 @@ input {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .search-box,
@@ -290,7 +349,7 @@ input {
 .search-box {
   display: flex;
   align-items: center;
-  width: clamp(330px, 25vw, 440px);
+  width: clamp(200px, 25vw, 440px);
   height: 52px;
   padding: 0 18px;
   border-radius: 999px;
@@ -371,6 +430,7 @@ input {
   color: rgba(23, 50, 107, 0.7);
 }
 
+/* -- Map hero ------------------------------------ */
 .hero-layout {
   display: grid;
   grid-template-columns: 128px minmax(0, 1fr) 92px;
@@ -623,6 +683,7 @@ input {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.22);
 }
 
+/* -- Destination cards --------------------------- */
 .recommend-panel {
   margin-top: 8px;
   padding: 16px 16px 14px;
@@ -752,6 +813,7 @@ input {
   color: #18326b;
 }
 
+/* -- Service footer ------------------------------ */
 .service-bar {
   display: flex;
   align-items: center;
@@ -784,6 +846,7 @@ input {
   background: linear-gradient(180deg, rgba(97, 168, 255, 0.2), rgba(255, 255, 255, 0.9));
   color: #1f57dc;
   font-size: 18px;
+  flex-shrink: 0;
 }
 
 .assistant-footer {
@@ -803,4 +866,356 @@ input {
   border-radius: 50%;
   color: #295ddc;
   font-size: 24px;
+  flex-shrink: 0;
+}
+
+/* -- Mobile zoom controls (floating) ------------ */
+.mobile-zoom {
+  display: none;
+}
+
+/* ================================================
+   RESPONSIVE - Tablet (<= 1024px)
+   ================================================ */
+@media (max-width: 1024px) {
+  .sidebar-shell {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 220px;
+    z-index: 100;
+    transform: translateX(-100%);
+  }
+
+  .sidebar-shell.open {
+    transform: translateX(0);
+  }
+
+  .sidebar {
+    border-radius: 0 30px 30px 0;
+    padding-top: 18px;
+  }
+
+  .sidebar-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: 0 0 4px auto;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    color: #17326b;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.32);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .sidebar-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .page-shell {
+    padding: 18px 16px 16px;
+  }
+
+  .topbar {
+    padding: 16px 16px 12px;
+    gap: 12px;
+  }
+
+  .hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .info-column {
+    display: flex;
+    gap: 12px;
+    padding-top: 0;
+    overflow-x: auto;
+  }
+
+  .status-card,
+  .tips-card {
+    width: auto;
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+
+  .controls-column {
+    display: none;
+  }
+
+  .mobile-zoom {
+    display: flex;
+    position: absolute;
+    right: 12px;
+    bottom: 16px;
+    z-index: 4;
+    gap: 8px;
+  }
+
+  .mobile-zoom button {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: #27487c;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(47, 110, 197, 0.18);
+    backdrop-filter: blur(8px);
+  }
+
+  .map-stage {
+    min-height: 400px;
+    height: calc(100vh - 420px);
+  }
+
+  .map-canvas-shell {
+    min-height: 400px;
+  }
+
+  .map-viewport {
+    height: 400px;
+  }
+
+  .island-card {
+    right: 8px;
+    bottom: 8px;
+    width: 110px;
+    height: 132px;
+    padding: 10px;
+  }
+
+  .cards-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .service-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .assistant-footer {
+    min-width: auto;
+    width: 100%;
+  }
+}
+
+/* ================================================
+   RESPONSIVE - Mobile (<= 640px)
+   ================================================ */
+@media (max-width: 640px) {
+  .topbar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 12px 10px;
+  }
+
+  .brand-line h1 {
+    font-size: 28px;
+  }
+
+  .brand-line p {
+    font-size: 18px;
+  }
+
+  .brand-tagline {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+
+  .topbar-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+    height: 44px;
+    padding: 0 14px;
+  }
+
+  .icon-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .profile-button {
+    height: 44px;
+    padding: 0 12px 0 8px;
+  }
+
+  .profile-button > span:last-of-type {
+    display: none;
+  }
+
+  .page-shell {
+    padding: 12px 10px 10px;
+  }
+
+  .info-column {
+    gap: 8px;
+  }
+
+  .status-card,
+  .tips-card {
+    padding: 12px;
+    font-size: 12px;
+    min-width: 120px;
+  }
+
+  .map-stage {
+    min-height: 320px;
+    height: 50vh;
+  }
+
+  .map-canvas-shell {
+    min-height: 320px;
+  }
+
+  .map-viewport {
+    height: 320px;
+  }
+
+  .map-pin.sm .pin-pill {
+    min-width: 52px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .map-pin.md .pin-pill {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .map-pin.lg .pin-pill {
+    min-width: 68px;
+    padding: 9px 14px;
+    font-size: 14px;
+  }
+
+  .pin-tag {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .pin-ring {
+    width: 20px;
+    height: 20px;
+  }
+
+  .island-card {
+    display: none;
+  }
+
+  .recommend-panel {
+    padding: 12px 10px 10px;
+    border-radius: 22px;
+  }
+
+  .recommend-strip {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .strip-arrow {
+    display: none;
+  }
+
+  .cards-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .destination-card {
+    min-height: 140px;
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .destination-head h3 {
+    font-size: 16px;
+  }
+
+  .card-tags {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .card-tags span {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .destination-card button {
+    min-width: 72px;
+    height: 30px;
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .service-bar {
+    border-radius: 18px 18px 0 0;
+    padding: 12px;
+  }
+
+  .assistant-footer {
+    gap: 8px;
+    padding: 6px 6px 6px 10px;
+  }
+}
+
+/* ================================================
+   RESPONSIVE - Small mobile (<= 380px)
+   ================================================ */
+@media (max-width: 380px) {
+  .cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-line h1 {
+    font-size: 24px;
+  }
+
+  .brand-line p {
+    font-size: 16px;
+  }
+
+  .brand-star {
+    display: none;
+  }
 }

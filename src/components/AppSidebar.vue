@@ -1,6 +1,15 @@
 <template>
-  <aside class="sidebar-shell">
+  <aside class="sidebar-shell" :class="{ open }">
     <div class="sidebar glass-panel">
+      <button
+        class="sidebar-close-btn"
+        type="button"
+        aria-label="关闭菜单"
+        @click="$emit('close')"
+      >
+        <span class="i-lucide-x"></span>
+      </button>
+
       <section class="assistant-card">
         <div class="assistant-avatar">
           <div class="avatar-face"></div>
@@ -18,6 +27,7 @@
           class="menu-item"
           :class="{ active: item.active }"
           type="button"
+          @click="$emit('close')"
         >
           <span class="menu-icon" aria-hidden="true">{{ item.icon }}</span>
           <span class="menu-label">{{ item.label }}</span>
@@ -33,5 +43,11 @@ defineProps({
     type: Array,
     required: true,
   },
+  open: {
+    type: Boolean,
+    default: false,
+  },
 })
+
+defineEmits(["close"])
 </script>

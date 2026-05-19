@@ -1,9 +1,27 @@
 <template>
   <div class="travel-home">
-    <AppSidebar :items="menuItems" />
+    <div
+      class="sidebar-overlay"
+      :class="{ visible: sidebarOpen }"
+      @click="sidebarOpen = false"
+    ></div>
+    <AppSidebar
+      :items="menuItems"
+      :open="sidebarOpen"
+      @close="sidebarOpen = false"
+    />
+
     <header class="topbar">
       <div class="brand-block">
         <div class="brand-line">
+          <button
+            class="mobile-menu-btn"
+            type="button"
+            aria-label="打开菜单"
+            @click="sidebarOpen = true"
+          >
+            <span class="i-lucide-menu"></span>
+          </button>
           <h1>Travel<span>China</span></h1>
           <p>☁️游中国</p>
           <i class="brand-star" aria-hidden="true"></i>
@@ -29,6 +47,7 @@
         </button>
       </div>
     </header>
+
     <main id="main-content" class="page-shell">
       <MapCanvasSection :pins="cityPins" />
       <DestinationCards :cards="destinationCards" />
@@ -38,9 +57,12 @@
 </template>
 
 <script setup>
+import { ref } from "vue"
 import AppSidebar from "./components/AppSidebar.vue"
 import DestinationCards from "./components/DestinationCards.vue"
 import MapCanvasSection from "./components/MapCanvasSection.vue"
 import ServiceFooter from "./components/ServiceFooter.vue"
 import { cityPins, destinationCards, features, menuItems } from "./data/travelData"
+
+const sidebarOpen = ref(false)
 </script>
